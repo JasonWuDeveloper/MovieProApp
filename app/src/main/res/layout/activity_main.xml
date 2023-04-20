@@ -12,9 +12,18 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
-    app:be
+    app:behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:layout_marginTop="15dp">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvMovie"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"/>
+</RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
