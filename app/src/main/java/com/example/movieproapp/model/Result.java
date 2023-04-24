@@ -47,7 +47,7 @@ public class Result implements Parcelable {
 
     public Result(Parcel in) {
         this.page = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        in.readList(this.results,(Movie.class.getClassLoader()));
+        in.readList(this.results,(com.example.movieproapp.model.Movie.class.getClassLoader()));
         this.totalResults = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.totalPages = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }

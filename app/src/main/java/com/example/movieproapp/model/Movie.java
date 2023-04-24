@@ -2,6 +2,7 @@ package com.example.movieproapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -10,6 +11,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.library.baseAdapters.BR;
 
 
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -26,6 +28,20 @@ public class Movie extends BaseObservable implements Parcelable {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
+    @BindingAdapter({"posterPath"})
+    public static void loadImage(ImageView imageView, String imageURL){
+
+        // BASIC IMAGE URL
+        // https://image.tmdb.org/t/p/original/[poster_path]
+
+        String imagePath = "https://image.tmdb.org/t/p/w500"+imageURL;
+
+        Glide.with(imageView.getContext())
+                .load(imagePath)
+                .into(imageView);
+
+
+    }
 
     @SerializedName("adult")
     @Expose
@@ -221,7 +237,7 @@ public class Movie extends BaseObservable implements Parcelable {
         parcel.writeValue(posterPath);
         parcel.writeValue(originalLanguage);
         parcel.writeValue(originalTitle);
-        parcel.writeValue(genreIds);
+//        parcel.writeValue(genreIds);
         parcel.writeValue(backdropPath);
         parcel.writeValue(adult);
         parcel.writeValue(overview);
@@ -232,19 +248,19 @@ public class Movie extends BaseObservable implements Parcelable {
     }
 
     public Movie(Parcel in) {
+        this.voteCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.video = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+        this.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));
+        this.title = ((String) in.readValue((String.class.getClassLoader())));
+        this.popularity = ((Double) in.readValue((Double.class.getClassLoader())));
         this.posterPath = ((String) in.readValue((String.class.getClassLoader())));
+        this.originalLanguage = ((String) in.readValue((String.class.getClassLoader())));
+        this.originalTitle = ((String) in.readValue((String.class.getClassLoader())));
+//        in.readList(this.genreIds, (java.lang.Integer.class.getClassLoader()));
+        this.backdropPath = ((String) in.readValue((String.class.getClassLoader())));
         this.adult = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
-        this.overview = ((String) in.readValue((String.class.getClassLoader())));;
-        this.releaseDate = ((String) in.readValue((String.class.getClassLoader())));;
-        in.readList(this.genreIds,(Integer.class.getClassLoader()));
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));;
-        this.originalTitle = ((String) in.readValue((String.class.getClassLoader())));;
-        this.originalLanguage = ((String) in.readValue((Double.class.getClassLoader())));;
-        this.title = ((String) in.readValue((String.class.getClassLoader())));;
-        this.backdropPath = ((String) in.readValue((String.class.getClassLoader())));;
-        this.popularity = ((Double) in.readValue((Double.class.getClassLoader())));;
-        this.voteCount = ((Integer) in.readValue((Integer.class.getClassLoader())));;
-        this.video = ((Boolean) in.readValue((Boolean.class.getClassLoader())));;
-        this.voteAverage = ((Double) in.readValue((Double.class.getClassLoader())));;
+        this.overview = ((String) in.readValue((String.class.getClassLoader())));
+        this.releaseDate = ((String) in.readValue((String.class.getClassLoader())));
     }
 }

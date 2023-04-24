@@ -1,7 +1,9 @@
 package com.example.movieproapp.model;
 
 import android.app.Application;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.movieproapp.R;
@@ -31,13 +33,15 @@ public class MovieRepository {
         Call<Result> call = movieDataService.getPopularMovie(application.getApplicationContext().getString(R.string.api_key));
         call.enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
                 Result result = response.body();
-
                 if (result != null && result.getResults() != null) {
                         movies = (ArrayList<Movie>) result.getResults();
                         mutableLiveData.setValue(movies);
+
                 }
+
+
             }
 
             @Override
